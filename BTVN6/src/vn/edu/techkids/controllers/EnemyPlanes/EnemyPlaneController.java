@@ -1,6 +1,8 @@
 package vn.edu.techkids.controllers.EnemyPlanes;
 
 import vn.edu.techkids.controllers.*;
+import vn.edu.techkids.controllers.EnemyBullets.EnemyBulletController;
+import vn.edu.techkids.controllers.EnemyBullets.EnemyBulletControllerManager;
 import vn.edu.techkids.models.*;
 import vn.edu.techkids.views.GameDrawer;
 import vn.edu.techkids.views.ImageDrawer;
@@ -15,6 +17,7 @@ public class EnemyPlaneController extends SingleControllerWithHP implements Coll
 
     private EnemyShotBehavior enemyShotBehavior;
     private EnemyBulletControllerManager enemyBulletControllerManager;
+    private EnemyBulletController enemyBulletController;
 
     private int count = 0;
 
@@ -40,29 +43,36 @@ public class EnemyPlaneController extends SingleControllerWithHP implements Coll
         CollisionPool.getInst().add(this);
     }
 
+//    public EnemyPlaneController(EnemyPlane gameObject, GameDrawer gameDrawer, GameVector gameVector, EnemyBulletController enemyBulletController) {
+//        super(gameObject, gameDrawer);
+//        this.gameVector = gameVector;
+//        enemyBulletControllerManager = new EnemyBulletControllerManager();
+//        this.enemyBulletController = enemyBulletController;
+//        CollisionPool.getInst().add(this);
+//    }
+
     /* TODO override run */
 
     @Override
     public void run() {
         super.run();
         this.enemyBulletControllerManager.run();
-
-
         count++;
         if (GameConfig.getInst().durationInSeconds(count) >= 2) {
             count = 0;
-            EnemyBullet enemyBullet = new EnemyBullet(
-                    gameObject.getX() + gameObject.getWidth() / 2 - EnemyBullet.WIDTH / 2,
-                    gameObject.getY() + gameObject.getHeight(),
-                    EnemyBullet.WIDTH,
-                    EnemyBullet.HEIGHT
-            );
-            ImageDrawer imageDrawer = new ImageDrawer("resources/enemy_bullet.png");
-            EnemyBulletController enemyBulletController = new EnemyBulletController(
-                    enemyBullet,
-                    imageDrawer
-            );
-            this.enemyBulletControllerManager.add(enemyBulletController);
+//            EnemyBullet enemyBullet = new EnemyBullet(
+//                    gameObject.getX() + gameObject.getWidth() / 2 - EnemyBullet.WIDTH / 2,
+//                    gameObject.getY() + gameObject.getHeight(),
+//                    EnemyBullet.WIDTH,
+//                    EnemyBullet.HEIGHT
+//            );
+//            ImageDrawer imageDrawer = new ImageDrawer("resources/enemy_bullet.png");
+//            EnemyBulletController enemyBulletController = new EnemyBulletController(
+//                    enemyBullet,
+//                    imageDrawer
+//            );
+//            this.enemyBulletControllerManager.add(enemyBulletController);
+            shot();
         }
 
         if (!GameConfig.getInst().isInScreen(this.gameObject)) {
@@ -117,12 +127,12 @@ public class EnemyPlaneController extends SingleControllerWithHP implements Coll
             case WHITE:
                 ImageDrawer whitePlaneDrawer = new ImageDrawer("resources/enemy_plane_white_1.png");
                 gameVector = new GameVector(2, 2);
-                enemyPlaneController = new EnemyPlaneController(enemyPlane, whitePlaneDrawer, gameVector);
+                enemyPlaneController = new EnemyPlaneController(enemyPlane, whitePlaneDrawer, gameVector, new EnemyLeftShotBehavior());
                 break;
             case BROWN:
                 ImageDrawer brownPlaneDrawer = new ImageDrawer("resources/enemy_plane_brown.png");
                 gameVector = new GameVector(-2, 2);
-                enemyPlaneController = new EnemyPlaneController(enemyPlane, brownPlaneDrawer, gameVector);
+                enemyPlaneController = new EnemyPlaneController(enemyPlane, brownPlaneDrawer, gameVector,  new EnemyRightShotBehavior());
                 break;
         }
         return enemyPlaneController;

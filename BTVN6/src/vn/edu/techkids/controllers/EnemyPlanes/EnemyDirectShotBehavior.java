@@ -1,6 +1,7 @@
 package vn.edu.techkids.controllers.EnemyPlanes;
 
-import vn.edu.techkids.controllers.EnemyBulletController;
+import vn.edu.techkids.controllers.EnemyBullets.EnemyBulletController;
+import vn.edu.techkids.controllers.EnemyBullets.EnemyBulletType;
 import vn.edu.techkids.models.EnemyBullet;
 import vn.edu.techkids.models.GameVector;
 import vn.edu.techkids.views.ImageDrawer;
@@ -12,10 +13,10 @@ import vn.edu.techkids.views.ImageDrawer;
 public class EnemyDirectShotBehavior implements EnemyShotBehavior {
     @Override
     public EnemyBulletController doShot(int x, int y) {
-        EnemyBullet enemyBullet = new EnemyBullet(x, y, EnemyBullet.WIDTH, EnemyBullet.HEIGHT);
-        ImageDrawer imageDrawer = new ImageDrawer("resources/enemy_bullet.png");
-        EnemyBulletController enemyBulletController = new EnemyBulletController(enemyBullet, imageDrawer, new GameVector(0,3));
-        return enemyBulletController;
+//        EnemyBullet enemyBullet = new EnemyBullet(x, y, EnemyBullet.WIDTH, EnemyBullet.HEIGHT);
+//        ImageDrawer imageDrawer = new ImageDrawer("resources/enemy_bullet.png");
+//        EnemyBulletController enemyBulletController = new EnemyBulletController(enemyBullet, imageDrawer, new GameVector(0,3));
+        return EnemyBulletController.creat(EnemyBulletType.DIRECT, x, y);
     }
 
 }

@@ -9,10 +9,10 @@ public class Bullet extends GameObject {
     public Bullet(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
-    public Bullet(int x, int y, int width, int height, int damage) {
-        super(x, y, width, height);
-        damage = DAMAGE;
-    }
+//    public Bullet(int x, int y, int width, int height, int damage) {
+//        super(x, y, width, height);
+//        damage = DAMAGE;
+//    }
 
     public static void increase () {
         DAMAGE ++ ;

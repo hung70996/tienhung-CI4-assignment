@@ -1,6 +1,6 @@
 package vn.edu.techkids.controllers.EnemyPlanes;
 
-import vn.edu.techkids.controllers.EnemyBulletController;
+import vn.edu.techkids.controllers.EnemyBullets.EnemyBulletController;
 
 /**
  * Created by Administrator on 5/9/2016.
